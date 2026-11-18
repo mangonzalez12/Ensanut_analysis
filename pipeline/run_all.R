@@ -1,0 +1,8 @@
+source("../R/1_data_cleaning.R")
+source("../R/2_Stratification.R")
+source("../R/3_heatmap_clustering.R")
+source("../R/3_dbarplots.R")
+source("../R/4_histogram_scatterplots.R")
+source("../R/4_pca_visualization.R")
+source("../R/4_umap_visualization.R")
+source("../R/4_TSNE.R")
