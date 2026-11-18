@@ -6,8 +6,7 @@ library("VIM") #imputation
 
 
 #Read dataset 
-data <- read.csv("../data/data_13nov.csv", header = TRUE, skip = 1) #previous data data_dep.csv(n=1165)
-data <- data[1:1163, ] #Remove empty rows
+data <- read.csv(here::here("data", "data_13nov.csv"), header = TRUE, skip = 1)
 rownames(data) = data$Folio.del.participante #Set rownames with Folio del participante
 data =data
 #Print dimensions
@@ -620,7 +619,10 @@ hist(Metabolic_Syndromehigh$HOMA_IR)
 
 
 #Write file with all processed variables
-write.csv(data, "../Output/clean_data_63 variables.csv")
+write.csv(data,
+          file = here::here("data", "Output", "clean_data_63_variables.csv"),
+          row.names = TRUE)
+
 
 
 #Final selection of variables for downstream analysis (11 variables) para clustering
@@ -698,4 +700,6 @@ df_norm <- normalize_vars(imp_df)
 df_sc <- scale_zscore(df_norm)
 
 #Write data for heatmap clustering
-write.csv(df_sc, "../Output/clean_data_for_clustering.csv")
+write.csv(df_sc,
+          file = here::here("data", "Output", "clean_data_for_clustering.csv"),
+          row.names = TRUE)

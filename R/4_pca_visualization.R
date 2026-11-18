@@ -5,12 +5,12 @@ library(ggrepel)
 library(corrplot)
 library(plotly)
 
-data <- read.csv("../Output/clean_data_for_clustering.csv", row.names = 1, header = TRUE)
-labels <- read.csv("../Output/clean_data_for statistical analysis.csv", row.names = 1, header = TRUE)
-
-
+data <- read.csv(here::here("data", "Output", "clean_data_for_clustering.csv"),
+                 row.names = 1, header = TRUE)
+labels <- read.csv(here::here("data", "Output", "clean_data_for_statistical_analysis.csv"),
+                   row.names = 1, header = TRUE)
 # Run PCA
-pca_result <- prcomp(df, center = TRUE)
+pca_result <- prcomp(data, center = TRUE)
 
 # Summary
 summary(pca_result)
@@ -60,7 +60,12 @@ p <-  ggplot(loadings_long, aes(x = reorder(Variable, Loading), y = Loading, fil
     strip.text = element_text(size = 12)   # facet ("PC1", "PC2"...) labels
   )
   
-ggsave("../Visualizacion/pca/pca_loadingsPC1-PC2.png", plot = p, width = 14, height = 10, dpi = 300)
+
+dir.create(here::here("visualization", "pca"), recursive = TRUE, showWarnings = FALSE)
+
+ggsave(here::here("visualization", "pca", "pca_loadingsPC1-PC2.png"),
+       plot = p, width = 14, height = 10, dpi = 300)
+
 
 
 
@@ -153,9 +158,8 @@ p <- ggplot() +
        y = paste0("PC2 (", round(var_exp[2], 1), "%)")) +
   theme_minimal(base_size = 16)
 
-ggsave("../Visualizacion/pca/pca_biplot_Age_Quartile_2.png", plot = p, width = 14, height = 10, dpi = 300)
-
-
+ggsave(here::here("visualization", "pca", "pca_biplot_Age_Quartile_2.png"),
+       plot = p, width = 14, height = 10, dpi = 300)
 
 
 
@@ -184,9 +188,8 @@ p <- ggplot() +
        y = paste0("PC2 (", round(var_exp[2], 1), "%)")) +
   theme_minimal(base_size = 16)                    # bumped up from 13
 
-ggsave("../Visualizacion/pca/pca_biplot_AGES_FINAL.png", plot = p, width = 14, height = 10, dpi = 300)
-
-
+ggsave(here::here("visualization", "pca", "pca_biplot_AGES_FINAL.png"),
+       plot = p, width = 14, height = 10, dpi = 300)
 
 
 

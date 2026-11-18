@@ -4,9 +4,8 @@ library(tidyr)
 library(tidyverse)
 library(patchwork)
 
-
-df <- read.csv("../Output/clean_data_for statistical analysis.csv", row.names = 1, header = TRUE)
-
+df <- read.csv(here::here("data", "Output", "clean_data_for_statistical_analysis.csv"),
+                   header = TRUE, row.names = 1)
 
 
 # --- reshape to long format ---
@@ -64,9 +63,9 @@ p1 <- ggplot(df_summary, aes(x = AGES, y = mean_pct, fill = NOVA_group)) +
   nature_theme
 
 
-ggsave("../Visualizacion/ages/NOVA_composition_by_AGES_new.png", p1, width = 12, height = 10, dpi = 300)
 
-
+ggsave(filename = here::here("visualization", "ages", "NOVA_composition_by_AGES_new.png"),
+       plot = p1, width = 20, height = 12, dpi = 400)
 
 
 
@@ -98,9 +97,7 @@ p1_group <- ggplot(df_summary_group, aes(x = Group, y = mean_pct, fill = NOVA_gr
        fill = NULL, title = "Dietary NOVA % Kcal by Groups") +
   nature_theme
 
-
-ggsave("../Visualizacion/ages/NOVA_composition_by_Groups.png", p1_group, width = 12, height = 10, dpi = 300)
-
-
+ggsave(filename = here::here("visualization", "ages", "NOVA_composition_by_Groups.png"),
+       plot = p1_group, width = 20, height = 12, dpi = 400)
 
 

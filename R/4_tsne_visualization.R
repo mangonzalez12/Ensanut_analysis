@@ -5,9 +5,10 @@ library(plotly)
 
 
 #Read data
-data <- read.csv("../Output/clean_data_for_clustering.csv", row.names = 1, header = TRUE)
-labels <- read.csv("../Output/clean_data_55 variables and 3 clusters.csv", row.names = 1, header = TRUE)
-
+data <- read.csv(here::here("data", "Output", "clean_data_for_clustering.csv"),
+                 row.names = 1, header = TRUE)
+labels <- read.csv(here::here("data", "Output", "clean_data_for_statistical_analysis.csv"),
+                   row.names = 1, header = TRUE)
 #Fit Rtsne
 set.seed(42)
 tsne_results <- Rtsne::Rtsne(data,

@@ -3,8 +3,10 @@ library(ggplot2)
 library(cluster)
 
 #Read data
-data = read.csv("../Output/clean_data_for_clustering.csv", header = TRUE, row.names = 1)
-labels <- read.csv("../Output/clean_data_for statistical analysis.csv", row.names = 1, header = TRUE)
+data <- read.csv(here::here("data", "Output", "clean_data_for_clustering.csv"), row.names = 1,
+                 header = TRUE)
+labels <- read.csv(here::here("data", "Output", "clean_data_for_statistical_analysis.csv"),
+                   header = TRUE, row.names = 1)
 
 
 labels_group1 <- labels[labels$Groups == "Group_1", , drop = FALSE]
@@ -108,9 +110,8 @@ ht <- pheatmap::pheatmap(
   silent                   = TRUE
 )
 
-ggsave(ht, filename="../Visualizacion/heatmap/Heatmap_3_clusters_small.png", width = 20, height = 12, dpi = 400)
-
-
+ggsave(filename = here::here("visualization", "heatmap", "Heatmap_3_clusters_small.png"),
+       plot = ht$gtable, width = 20, height = 12, dpi = 400)
 
 
 # Heatmap — Figure 2
@@ -141,7 +142,10 @@ ht <- pheatmap::pheatmap(
 )
 
 # Save with enough height to fit all 6 legends
-png("../Visualizacion/heatmap/heatmap_figura2.png", width = 20, height = 10, units = "in", res = 300)
+dir.create(here::here("visualizacion", "heatmap"), recursive = TRUE, showWarnings = FALSE)
+
+png(here::here("visualization", "heatmap", "heatmap_figura2.png"),
+    width = 20, height = 10, units = "in", res = 300)
 grid::grid.newpage()
 grid::grid.draw(ht$gtable)
 dev.off()
@@ -151,18 +155,19 @@ dev.off()
 
 
 # Save as PDF (vector — publication quality)
-pdf("../Visualizacion/Heatmap/Figure2_Heatmap_3_clusters.pdf", width = 22, height = 175) #20, 12
+dir.create(here::here("visualization", "heatmap"), recursive = TRUE, showWarnings = FALSE)
+
+pdf(here::here("visualization", "heatmap", "Figure2_Heatmap_3_clusters.pdf"),
+    width = 22, height = 12)
 grid::grid.newpage()
 grid::grid.draw(ht$gtable)
 dev.off()
 
 
-
-
-#Write file to use later in UMAP/PCA visualization
-write.csv(data, "../Output/p_heatmap3_clusters_clean_data for ML.csv")
-
-
+# Write file to use later in UMAP/PCA visualization
+write.csv(data,
+          here::here("data", "Output", "p_heatmap3_clusters_clean_data_for_ML.csv"),
+          row.names = TRUE)
 
 sil <- silhouette(cluster_labels, dist(df, method = "euclidean"))
 cat("Average silhouette:", mean(sil[, 3]), "\n")

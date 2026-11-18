@@ -5,9 +5,12 @@ library(VIM)
 library(tidyverse)
 library(dplyr)
 
-data <- read.csv("../Output/clean_data_for_clustering.csv", row.names = 1, header = TRUE)
-labels <- read.csv("../Output/clean_data_for statistical analysis.csv", row.names = 1, header = TRUE)
 
+#Read data
+data <- read.csv(here::here("data", "Output", "clean_data_for_clustering.csv"),
+                 row.names = 1, header = TRUE)
+labels <- read.csv(here::here("data", "Output", "clean_data_for_statistical_analysis.csv"),
+                   row.names = 1, header = TRUE)
 #Remove last column
 data = data[, -ncol(data), drop = FALSE]
 

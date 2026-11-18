@@ -3,7 +3,8 @@ library(ggplot2)
 library(cluster)
 
 #Read data
-data = read.csv("../Output/clean_data_for_clustering.csv", header = TRUE, row.names = 1)
+data = read.csv(here::here("data", "Output", "clean_data_for_clustering.csv"), header = TRUE, row.names= 1)
+
 
 #Data
 df = data
@@ -39,6 +40,10 @@ data$pheatmap_cluster <- paste0("Group_", cluster_labels[rownames(data)])
 table(data$pheatmap_cluster)
 
 # Write file to combine 
-data2 = read.csv("../Output/clean_data_63 variables.csv", header = TRUE, row.names = 1)
+data2 <- read.csv(here::here("data", "Output", "clean_data_63_variables.csv"), header = TRUE, row.names = 1)
+
 data2$Groups <- data$pheatmap_cluster
-write.csv(data2, "../Output/clean_data_for statistical analysis.csv")
+
+write.csv(data2,
+          file = here::here("data", "Output", "clean_data_for_statistical_analysis.csv"),
+          row.names = TRUE)
