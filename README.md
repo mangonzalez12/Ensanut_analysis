@@ -9,15 +9,18 @@ and to identify participant profiles through clustering and dimensionality reduc
 
 **PCA biplot by AGEs intake**
 
-![PCA biplot colored by AGEs intake](visualization/pca/pca_biplot_AGES_FINAL.png)
+![PCA biplot colored by AGEs intake](<img width="4200" height="3000" alt="pca_biplot_AGES_FINAL" src="https://github.com/user-attachments/assets/be64077f-a935-4141-9834-8cb1323c8a7b" />
+)
 
 **Correlation between AGEs and NOVA 4 consumption (total population)**
 
-![Scatter plot of AGEs vs NOVA 4 consumption](visualization/scatter/AGES_vs_nova4_correlation_total_population.png)
+![Scatter plot of AGEs vs NOVA 4 consumption](<img width="3600" height="1800" alt="AGES_vs_nova4_correlation in total population_new" src="https://github.com/user-attachments/assets/857a8d1d-0640-4d2c-a3b0-e9e97d35f922" />
+)
 
 **Hierarchical clustering heatmap (3 clusters)**
 
-![Heatmap with 3 participant clusters](visualization/heatmap/Heatmap_3_clusters_small.png)
+![Heatmap with 3 participant clusters](<img width="8000" height="4800" alt="Heatmap_3_clusters_small" src="https://github.com/user-attachments/assets/f4fa4b85-dc06-432a-8403-b1a379082a01" />
+)
 
 ## Workflow
 
