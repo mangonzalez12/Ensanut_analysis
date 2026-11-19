@@ -108,23 +108,13 @@ Or run the scripts in `R/` one by one in numeric order.
 
 ENSANUT microdata are publicly available from the **Instituto Nacional de Salud Pública (INSP)**: <https://ensanut.insp.mx>. The curated data used here are **not** included in this repository.
 
-## Notes
-
-- BMI and HbA1c have small amounts of missing data. They are handled during cleaning and reported in the figure captions.
-- Figures follow a Nature-style aesthetic for publication.
 
 ## Citation
 
-Manuscript in preparation. If you use this code, please cite this repository:
+Manuscript in preparation. 
 
-```
-<Author(s)>. ENSANUT Cohort Analysis (2026). https://github.com/<user>/Ensanut_analysis
-```
 
 ## Author
 
 **Manuel**, PhD in Biomedical Sciences (Maastricht University). Biomedical research and applied AI.
 
-## License
-
-*(Add a license, e.g. MIT for the code. ENSANUT data are subject to INSP terms of use.)*
