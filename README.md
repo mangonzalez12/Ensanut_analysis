@@ -8,7 +8,7 @@
 
 <p align="center">
   <img src="visualization/pca/pca_biplot_AGES_FINAL.png" width="48%" alt="PCA biplot of metabolic and dietary variables, including dietary AGEs"/>
-  <img src="visualization/heatmap/Heatmap_3_clusters_small.png" width="48%" alt="Heatmap of standardized variables across the three clusters"/>
+  <img src="visualization/heatmap/heatmap_figura2.png" width="48%" alt="Heatmap of standardized variables across the three clusters"/>
 </p>
 <p align="center"><sub><b>Left:</b> PCA biplot including dietary advanced glycation end products (AGEs). <b>Right:</b> Heatmap of standardized clinical, metabolic and dietary features across the three clusters.</sub></p>
 
