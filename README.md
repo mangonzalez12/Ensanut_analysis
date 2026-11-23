@@ -7,7 +7,7 @@
 ![Status](https://img.shields.io/badge/status-manuscript%20in%20preparation-orange)
 
 <p align="center">
-  <img src="visualization/pca/pca_biplot_AGES_FINAL.png" width="48%" alt="PCA biplot of metabolic and dietary variables, including dietary AGEs"/>
+  <img width="4200" height="3000" alt="pca_biplot_AGES_FINAL" src="https://github.com/user-attachments/assets/e2fc0ec4-642b-4671-93ec-caa93264e9c3" />
   <img width="3600" height="1800" alt="dAGEs_vs_nova_correlation in total population_new" src="https://github.com/user-attachments/assets/f2d32f30-4b7d-4831-9f8e-0661b1df3d0e" />
 
 </p>
