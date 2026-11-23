@@ -11,7 +11,7 @@
   <img width="3600" height="1800" alt="dAGEs_vs_nova_correlation in total population_new" src="https://github.com/user-attachments/assets/f2d32f30-4b7d-4831-9f8e-0661b1df3d0e" />
 
 </p>
-<p align="center"><sub><b>Left:</b> PCA biplot including dietary advanced glycation end products (AGEs). <b>Right:</b> Heatmap of standardized clinical, metabolic and dietary features across the three clusters.</sub></p>
+<p align="center"><sub><b>up:</b> PCA biplot including dietary advanced glycation end products (AGEs). <b>down:</b> Heatmap of standardized clinical, metabolic and dietary features across the three clusters.</sub></p>
 
 ---
 
