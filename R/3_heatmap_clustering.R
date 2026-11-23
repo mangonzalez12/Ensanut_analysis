@@ -103,7 +103,6 @@ nova_labels <- c(
   Kcal_day = "Energy (Kcal/day)",
   WaistCirc = "Waist circumference (cm)",
   BMI = "Body Mass Index (kg/m^2)" 
-
 )
 relabel_vars <- function(x, lookup = nova_labels) {
   ifelse(x %in% names(lookup), lookup[x], x)

@@ -56,3 +56,6 @@ rsconnect/
 src/*.o
 src/*.so
 src/*.dll
+
+# macOS
+.DS_Store

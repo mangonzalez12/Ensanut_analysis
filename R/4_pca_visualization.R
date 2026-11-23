@@ -206,7 +206,7 @@ p <- ggplot() +
        y = paste0("PC2 (", round(var_exp[2], 1), "%)")) +
   theme_minimal(base_size = 25)                    # bumped up from 13
 
-ggsave(here::here("visualization", "pca", "pca_biplot_AGES_FINAL.png"),
+ggsave(here::here("visualization", "pca", "pca_biplot_AGES_FINAL_2.png"),
        plot = p, width = 14, height = 10, dpi = 300)
 
 

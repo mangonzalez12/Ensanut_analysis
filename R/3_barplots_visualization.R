@@ -41,7 +41,7 @@ df_summary <- df_long %>%
 p1 <- ggplot(df_summary, aes(x = AGEs, y = mean_pct, fill = NOVA_group)) +
   geom_col(width = 0.6, color = "white", linewidth = 0.5) +
   geom_text(aes(label = sprintf("%.1f%%", mean_pct)),
-            position = position_stack(vjust = 0.5), size = 10, color = "white") +
+            position = position_stack(vjust = 0.5), size = 14, color = "white") +
   scale_fill_manual(values = c("#2C7BB6", "#ABD9E9", "#FDAE61", "#D7191C")) +
   labs(x = "AGEs consumption level", y = "Mean % of total kcal", size = 8,
        fill = NULL, title = "Dietary energy composition by NOVA group") +
@@ -56,7 +56,7 @@ p1 <- ggplot(df_summary, aes(x = AGEs, y = mean_pct, fill = NOVA_group)) +
   geom_col(width = 0.6, color = "white", linewidth = 0.3) +
   geom_text(aes(label = sprintf("%.1f%%", mean_pct)),
             position = position_stack(vjust = 0.5),
-            size = 12, color = "white") +
+            size = 16, color = "white") +
   scale_fill_manual(values = c("#2C7BB6", "#ABD9E9", "#FDAE61", "#D7191C")) +
   labs(x = "AGEs consumption level", y = "Mean % of total kcal",
        fill = NULL,
