@@ -1,6 +1,7 @@
 library(pheatmap)
 library(ggplot2)
 library(cluster)
+#library(units)
 
 #Read data
 data <- read.csv(here::here("data", "Output", "clean_data_for_clustering.csv"), row.names = 1,
@@ -23,12 +24,30 @@ table(labels_group3$Diagnosis)
 
 
 #Filter labels
-keep <- c("Groups", "Stratum", "Region", "Sex","AGES")#, "Diagnosis")
+keep <- c("Groups", "Stratum", "Region", "Sex","AGEs")#, "Diagnosis")
 meta <- subset(labels, select = keep)
+
+#Recode AGES_groups 
+meta$AGEs             <-dplyr::recode(meta$AGEs,
+                                      "Low (<8000 KU/Day)"  = "Low",
+                                      "Moderate (8000-15000 KU/Day)" = "Moderate",
+                                      "High (>15000 KU/Day)" = "High")
+
+#Rename variable 
+names(meta)[names(meta) == "AGEs"] <- "dAGEs"
+
+
 
 
 #data to df
 df = data
+
+
+
+
+
+
+
 
 
 
@@ -58,14 +77,14 @@ ann_colors <- list(
   #                       Metabolic_Syndromehigh = "#290AD8",
   #                       Diabetes               = "#A50021"),
   
-  AGES              = c(Low                     = "#FFDFCE",
+  dAGEs              = c(Low                     = "#FFDFCE",
                         Moderate                = "#F37B3B",
                         High                    = "#7B3014")
 )
 
 
 # Ensure all annotation variables are factors with levels that exactly match ann_colors
-meta$AGES <- factor(meta$AGES, levels = names(ann_colors$AGES))
+meta$dAGEs <- factor(meta$dAGEs, levels = names(ann_colors$dAGEs))
 #meta$Diagnosis   <- factor(meta$Diagnosis,   levels = names(ann_colors$Diagnosis))
 meta$Sex         <- factor(meta$Sex,         levels = names(ann_colors$Sex))
 meta$Region      <- factor(meta$Region,      levels = names(ann_colors$Region))
@@ -73,10 +92,18 @@ meta$Stratum     <- factor(meta$Stratum,     levels = names(ann_colors$Stratum))
 meta$Groups      <- factor(meta$Groups,      levels = names(ann_colors$Groups))
 
 nova_labels <- c(
-  NOVA1_pct = "NOVA 1-%Kcal",
-  NOVA2_pct = "NOVA 2-%Kcal",
-  NOVA3_pct = "NOVA 3-%Kcal",
-  NOVA4_pct = "NOVA 4-%Kcal"
+  NOVA1 = "NOVA 1-%Kcal",
+  NOVA2 = "NOVA 2-%Kcal",
+  NOVA3 = "NOVA 3-%Kcal",
+  NOVA4 = "NOVA 4-%Kcal",
+  Lipids_day = "Lipids (g/day)",
+  Protein_day = "Proteins (g/day)",
+  Carbs_day = "Carbohydrates (g/day)",
+  dAGEs_day = "dAGEs (KU/day)",
+  Kcal_day = "Energy (Kcal/day)",
+  WaistCirc = "Waist circumference (cm)",
+  BMI = "Body Mass Index (kg/m^2)" 
+
 )
 relabel_vars <- function(x, lookup = nova_labels) {
   ifelse(x %in% names(lookup), lookup[x], x)
@@ -101,8 +128,8 @@ ht <- pheatmap::pheatmap(
   cutree_rows              = 3,
   labels_col               = relabel_vars(colnames(df)),
   labels_row               = relabel_vars(rownames(df)),
-  fontsize                 = 11,
-  fontsize_col             = 10,
+  fontsize                 = 18,
+  fontsize_col             = 14,
   treeheight_row           = 30,
   treeheight_col           = 30,
   color                    = colorRampPalette(rev(RColorBrewer::brewer.pal(9, "RdBu")))(100),
@@ -133,8 +160,8 @@ ht <- pheatmap::pheatmap(
   cutree_rows              = 3,
   labels_col               = relabel_vars(colnames(df)),
   labels_row               = relabel_vars(rownames(df)),
-  fontsize                 = 11,
-  fontsize_col             = 10,
+  fontsize                 = 18,
+  fontsize_col             = 14,
   treeheight_row           = 30,
   treeheight_col           = 30,
   color                    = colorRampPalette(rev(RColorBrewer::brewer.pal(9, "RdBu")))(100),
@@ -192,6 +219,8 @@ table(res$Best.partition)
 
 print("Best partition is 6 clusters")
 print("This is the silhouette score for 6 clusters")
+
+##
 cluster_labels_6 = res$Best.partition
 sil <- silhouette(cluster_labels_6, dist(df, method = "euclidean"))
 cat("Average silhouette:", mean(sil[, 3]), "\n")

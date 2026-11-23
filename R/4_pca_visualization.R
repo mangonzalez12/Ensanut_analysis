@@ -9,6 +9,16 @@ data <- read.csv(here::here("data", "Output", "clean_data_for_clustering.csv"),
                  row.names = 1, header = TRUE)
 labels <- read.csv(here::here("data", "Output", "clean_data_for_statistical_analysis.csv"),
                    row.names = 1, header = TRUE)
+
+
+#Recode AGES_groups 
+labels$AGEs             <-dplyr::recode(labels$AGEs,
+                                      "Low (<8000 KU/Day)"  = "Low",
+                                      "Moderate (8000-15000 KU/Day)" = "Moderate",
+                                      "High (>15000 KU/Day)" = "High")
+
+
+
 # Run PCA
 pca_result <- prcomp(data, center = TRUE)
 
@@ -115,41 +125,50 @@ ggplot() +
 
 
 
-# Create a display-label column, only remapping the NOVA_pct vars
-nova_labels <- c(
-  NOVA1_pct = "NOVA 1-%Kcal",
-  NOVA2_pct = "NOVA 2-%Kcal",
-  NOVA3_pct = "NOVA 3-%Kcal",
-  NOVA4_pct = "NOVA 4-%Kcal"
-)
-
-loadings$Variable_label <- ifelse(
-  loadings$Variable %in% names(nova_labels),
-  nova_labels[loadings$Variable],
-  loadings$Variable
-)
-
 #Añadir la columna de labels
 pca_df <- cbind(scores, labels)
-#pca_df$DIABETES <- as.character(pca_df$DIABETES)
-#pca_df$PREDIABETES <- as.character(pca_df$PREDIABETES)
 
 
+# Rename loadings
+loadings_new_names <- c(
+  NOVA1 = "NOVA 1-%Kcal",
+  NOVA2 = "NOVA 2-%Kcal",
+  NOVA3 = "NOVA 3-%Kcal",
+  NOVA4 = "NOVA 4-%Kcal",
+  Lipids_day = "Lipids (g/day)",
+  Protein_day = "Proteins (g/day)",
+  Carbs_day = "Carbohydrates (g/day)",
+  dAGEs_day = "dAGEs (KU/day)",
+  Kcal_day = "Energy (Kcal/day)",
+  WaistCirc = "Waist circumference (cm)",
+  BMI = "Body Mass Index (kg/m^2)"
+)
+
+# Rename rownames, preserving unmatched names
+rownames(loadings) <- ifelse(
+  rownames(loadings) %in% names(loadings_new_names),
+  loadings_new_names[rownames(loadings)],
+  rownames(loadings)
+)
+
+# Create labels column for ggplot
+loadings$Variable_label <- rownames(loadings)
 
 
+# PCA Biplot
 p <- ggplot() +
   geom_point(data = pca_df, aes(x = PC1, y = PC2, color = Age_catg),
              alpha = 0.8, size = 2) +
   geom_segment(data = loadings,
-               aes(x = 0, y = 0,
-                   xend = PC1 * scale_factor,
-                   yend = PC2 * scale_factor),
-               arrow = arrow(length = unit(0.3, "cm")),
-               color = "black", linewidth = 0.7) +
+             aes(x = 0, y = 0,
+                 xend = PC1 * scale_factor,
+                 yend = PC2 * scale_factor),
+             arrow = arrow(length = unit(0.3, "cm")),
+             color = "black", linewidth = 0.7) +
   geom_text_repel(data = loadings,
                   aes(x = PC1 * scale_factor,
                       y = PC2 * scale_factor,
-                      label = Variable_label),          # <- changed
+                      label = Variable_label),
                   color = "black", size = 3.5) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "gray60") +
   geom_vline(xintercept = 0, linetype = "dashed", color = "gray60") +
@@ -162,13 +181,12 @@ ggsave(here::here("visualization", "pca", "pca_biplot_Age_Quartile_2.png"),
        plot = p, width = 14, height = 10, dpi = 300)
 
 
-
 head(pca_df)
 
 
 p <- ggplot() +
-  geom_point(data = pca_df, aes(x = PC1, y = PC2, color = AGES),
-             alpha = 0.8, size = 2) +
+  geom_point(data = pca_df, aes(x = PC1, y = PC2, color = AGEs),
+             alpha = 0.8, size = 2.5) +
   geom_segment(data = loadings,
                aes(x = 0, y = 0,
                    xend = PC1 * scale_factor,
@@ -178,15 +196,15 @@ p <- ggplot() +
   geom_text_repel(data = loadings,
                   aes(x = PC1 * scale_factor,
                       y = PC2 * scale_factor,
-                      label = Variable),
-                  color = "black", size = 3.5) +
+                      label = Variable_label),
+                  color = "black", size = 10) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "gray60") +
   geom_vline(xintercept = 0, linetype = "dashed", color = "gray60") +
-  scale_color_manual(values = ann_colors$AGES, name = "AGES", breaks = c("High", "Moderate", "Low")) +   # ← added here
+  scale_color_manual(values = ann_colors$dAGEs, name = "AGEs", breaks = c("High", "Moderate", "Low")) +   # ← added here
   labs(title = "PCA Biplot",
        x = paste0("PC1 (", round(var_exp[1], 1), "%)"),
        y = paste0("PC2 (", round(var_exp[2], 1), "%)")) +
-  theme_minimal(base_size = 16)                    # bumped up from 13
+  theme_minimal(base_size = 25)                    # bumped up from 13
 
 ggsave(here::here("visualization", "pca", "pca_biplot_AGES_FINAL.png"),
        plot = p, width = 14, height = 10, dpi = 300)
@@ -200,7 +218,7 @@ plot_ly(
   y = ~PC2,
   z = ~PC3,
   color = ~Diagnosis,
-  symbol = ~AGES,
+  symbol = ~AGEs,
   symbols = c("circle", "square", "diamond"),
   type = "scatter3d",
   mode = "markers",

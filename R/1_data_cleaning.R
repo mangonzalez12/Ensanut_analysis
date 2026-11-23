@@ -548,7 +548,7 @@ data <- data %>%
     InsulinResist_bin      = Resistencia_0_1,
     PhysicalActivity       = Actividad_física,
     Age_catg               = Edad_cat,
-    AGES                   = AGES_grupos,
+    AGEs                   = AGES_grupos,
     TG_tx                  = TG_tx,                                          
     Gluc_tx                = Gluc_tx,  
     HTA_tx                 = HTA_tx   
@@ -586,13 +586,12 @@ data$Age_catg         <- dplyr::recode(data$Age_catg,
                                        "4"  = "Quartile4")
 
 #Recode AGES_groups 
-data$AGES             <-dplyr::recode(data$AGES,
-                                      "1"   = "Low",
-                                      "2"   = "Moderate",
-                                      "3"   = "High")
+data$AGEs             <-dplyr::recode(data$AGEs,
+                                      "1"   = "Low (<8000 KU/Day)",
+                                      "2"   = "Moderate (8000-15000 KU/Day)",
+                                      "3"   = "High (>15000 KU/Day)")
 
 
-#Exploratory check
 table(data$Diagnosis)
 Metabolic_Syndromelow = subset(data, Diagnosis=="Metabolic_Syndromelow")
 Metabolic_Syndromehigh = subset(data, Diagnosis=="Metabolic_Syndromehigh")
