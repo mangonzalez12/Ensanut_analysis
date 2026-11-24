@@ -9,7 +9,7 @@
 <p align="center">
 
 <img width="4200" height="3000" alt="pca_biplot_AGES_FINAL" src="https://github.com/user-attachments/assets/b31eb03c-f158-4585-98f8-1cb32fd3192a" />
-<img width="8000" height="4800" alt="Heatmap_3_clusters_small" src="https://github.com/user-attachments/assets/d15299b8-64c1-4845-b63d-a59af7e27d1c" />
+<img width="6000" height="3000" alt="heatmap_figura2" src="https://github.com/user-attachments/assets/ec3a4a6a-626e-461c-9fea-5e5029b649c8" />
 
 </p>
 <p align="center"><sub><b>up:</b> PCA biplot including dietary advanced glycation end products (AGEs). <b>down:</b> Heatmap of standardized clinical, metabolic and dietary features across the three clusters.</sub></p>
