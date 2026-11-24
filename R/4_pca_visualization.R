@@ -131,17 +131,17 @@ pca_df <- cbind(scores, labels)
 
 # Rename loadings
 loadings_new_names <- c(
-  NOVA1 = "NOVA 1-%Kcal",
-  NOVA2 = "NOVA 2-%Kcal",
-  NOVA3 = "NOVA 3-%Kcal",
-  NOVA4 = "NOVA 4-%Kcal",
-  Lipids_day = "Lipids (g/day)",
-  Protein_day = "Proteins (g/day)",
-  Carbs_day = "Carbohydrates (g/day)",
-  dAGEs_day = "dAGEs (KU/day)",
-  Kcal_day = "Energy (Kcal/day)",
-  WaistCirc = "Waist circumference (cm)",
-  BMI = "Body Mass Index (kg/m^2)"
+  NOVA1 = "NOVA1-%Kcal",
+  NOVA2 = "NOVA2-%Kcal",
+  NOVA3 = "NOVA3-%Kcal",
+  NOVA4 = "NOVA4-%Kcal",
+  Lipids_day = "Lipids",
+  Protein_day = "Proteins",
+  Carbs_day = "Carbs",
+  dAGEs_day = "dAGEs",
+  Kcal_day = "Energy",
+  WaistCirc = "WC",
+  BMI = "BMI"
 )
 
 # Rename rownames, preserving unmatched names
@@ -186,25 +186,26 @@ head(pca_df)
 
 p <- ggplot() +
   geom_point(data = pca_df, aes(x = PC1, y = PC2, color = AGEs),
-             alpha = 0.8, size = 4.5) +
+             alpha = 0.8, size = 2) +
   geom_segment(data = loadings,
                aes(x = 0, y = 0,
                    xend = PC1 * scale_factor,
                    yend = PC2 * scale_factor),
                arrow = arrow(length = unit(0.3, "cm")),
-               color = "black", linewidth = 0.7) +
+               color = "black", linewidth = 0.8) +
   geom_text_repel(data = loadings,
                   aes(x = PC1 * scale_factor,
                       y = PC2 * scale_factor,
                       label = Variable_label),
-                  color = "black", size = 4) +
+                  color = "black", size = 6) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "gray60") +
   geom_vline(xintercept = 0, linetype = "dashed", color = "gray60") +
-  scale_color_manual(values = ann_colors$dAGEs, name = "AGEs", breaks = c("High", "Moderate", "Low")) +   # ← added here
+  scale_color_manual(values = c(Low = "#FFDFCE", Moderate = "#F37B3B", High = "#7B3014"),  # same as heatmap ann_colors$AGEs
+                     name = "dAGEs", breaks = c("High", "Moderate", "Low")) +
   labs(title = "PCA Biplot",
        x = paste0("PC1 (", round(var_exp[1], 1), "%)"),
        y = paste0("PC2 (", round(var_exp[2], 1), "%)")) +
-  theme_minimal(base_size = 20)                    # bumped up from 13
+  theme_minimal(base_size = 25)                    # bumped up from 13
 
 ggsave(here::here("visualization", "pca", "pca_biplot_AGES_FINAL.png"),
        plot = p, width = 14, height = 10, dpi = 300)

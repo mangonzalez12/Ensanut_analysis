@@ -92,17 +92,17 @@ meta$Stratum     <- factor(meta$Stratum,     levels = names(ann_colors$Stratum))
 meta$Groups      <- factor(meta$Groups,      levels = names(ann_colors$Groups))
 
 nova_labels <- c(
-  NOVA1 = "NOVA 1-%Kcal",
-  NOVA2 = "NOVA 2-%Kcal",
-  NOVA3 = "NOVA 3-%Kcal",
-  NOVA4 = "NOVA 4-%Kcal",
-  Lipids_day = "Lipids (g/day)",
-  Protein_day = "Proteins (g/day)",
-  Carbs_day = "Carbohydrates (g/day)",
-  dAGEs_day = "dAGEs (KU/day)",
-  Kcal_day = "Energy (Kcal/day)",
-  WaistCirc = "Waist circumference (cm)",
-  BMI = "Body Mass Index (kg/m^2)" 
+  NOVA1 = "NOVA1-%Kcal",
+  NOVA2 = "NOVA2-%Kcal",
+  NOVA3 = "NOVA3-%Kcal",
+  NOVA4 = "NOVA4-%Kcal",
+  Lipids_day = "Lipids",
+  Protein_day = "Proteins",
+  Carbs_day = "Carbs",
+  dAGEs_day = "dAGEs",
+  Kcal_day = "Energy",
+  WaistCirc = "WC",
+  BMI = "BMI" 
 )
 relabel_vars <- function(x, lookup = nova_labels) {
   ifelse(x %in% names(lookup), lookup[x], x)
@@ -127,8 +127,8 @@ ht <- pheatmap::pheatmap(
   cutree_rows              = 3,
   labels_col               = relabel_vars(colnames(df)),
   labels_row               = relabel_vars(rownames(df)),
-  fontsize                 = 18,
-  fontsize_col             = 14,
+  fontsize                 = 20,
+  fontsize_col             = 16,
   treeheight_row           = 30,
   treeheight_col           = 30,
   color                    = colorRampPalette(rev(RColorBrewer::brewer.pal(9, "RdBu")))(100),
@@ -159,8 +159,8 @@ ht <- pheatmap::pheatmap(
   cutree_rows              = 3,
   labels_col               = relabel_vars(colnames(df)),
   labels_row               = relabel_vars(rownames(df)),
-  fontsize                 = 18,
-  fontsize_col             = 14,
+  fontsize                 = 20,
+  fontsize_col             = 16,
   treeheight_row           = 30,
   treeheight_col           = 30,
   color                    = colorRampPalette(rev(RColorBrewer::brewer.pal(9, "RdBu")))(100),

@@ -15,12 +15,12 @@ fmt_p <- function(p) ifelse(p < 0.00001, "italic(p)<0.00001",
 p1 <- ggplot(data, aes(x = dAGES_total, y = NOVA1_pct)) + 
   geom_point(size = 2, color = "#2c3e50", alpha = 0.7) +
   geom_smooth(method = "lm", color = "#c0392b", fill = "#c0392b", alpha = 0.15) +
-  stat_cor(aes(label = paste0("italic(R)==", round(after_stat(r), 2), "~`,`~", fmt_p(after_stat(p)))),
-           method = "pearson", label.x.npc = "left", label.y.npc = "top", size = 4.5) +
+  stat_cor(aes(label = paste0("r==", round(after_stat(r), 2), "~`,`~", fmt_p(after_stat(p)))),
+           method = "pearson", label.x.npc = 0.85, label.y.npc = 0.85, size = 4.5) +
   labs(
     x = "dAGEs (total)",
     y = "NOVA 1-%Kcal",
-    #title = "Correlation between total dAGEs and NOVA 1-%Kcal in total population"
+    title = "Correlation between total dAGEs and NOVA 1-%Kcal in total population"
   ) +
   theme_minimal(base_size = 13) +
   theme(
@@ -36,12 +36,12 @@ ggsave(here::here("visualization", "scatter", "dAGEs_vs_nova1_correlation in tot
 p2<- ggplot(data, aes(x = dAGES_total, y = NOVA2_pct)) + 
   geom_point(size = 2, color = "#2c3e50", alpha = 0.7) +
   geom_smooth(method = "lm", color = "#c0392b", fill = "#c0392b", alpha = 0.15) +
-  stat_cor(aes(label = paste0("italic(R)==", round(after_stat(r), 2), "~`,`~", fmt_p(after_stat(p)))),
-           method = "pearson", label.x.npc = "left", label.y.npc = "top", size = 4.5) +
+  stat_cor(aes(label = paste0("r==", round(after_stat(r), 2), "~`,`~", fmt_p(after_stat(p)))),
+           method = "pearson", label.x.npc = 0.85, label.y.npc = 0.85, size = 4.5) +
   labs(
     x = "dAGEs (total)",
     y = "NOVA 2-%Kcal",
-    #title = "Correlation between total dAGEs and NOVA 2-%Kcal in total population"
+    title = "Correlation between total dAGEs and NOVA 2-%Kcal in total population"
   ) +
   theme_minimal(base_size = 13) +
   theme(
@@ -57,12 +57,12 @@ ggsave(here::here("visualization", "scatter", "dAGEs_vs_nova2_correlation in tot
 p3<- ggplot(data, aes(x = dAGES_total, y = NOVA3_pct)) + 
   geom_point(size = 2, color = "#2c3e50", alpha = 0.7) +
   geom_smooth(method = "lm", color = "#c0392b", fill = "#c0392b", alpha = 0.15) +
-  stat_cor(aes(label = paste0("italic(R)==", round(after_stat(r), 2), "~`,`~", fmt_p(after_stat(p)))),
-           method = "pearson", label.x.npc = "left", label.y.npc = "top", size = 4.5) +
+  stat_cor(aes(label = paste0("r==", round(after_stat(r), 2), "~`,`~", fmt_p(after_stat(p)))),
+           method = "pearson", label.x.npc = 0.85, label.y.npc = 0.85, size = 4.5) +
   labs(
     x = "dAGEs (total)",
     y = "NOVA 3-%Kcal",
-    #title = "Correlation between total dAGEs and NOVA 3-%Kcal in total population"
+    title = "Correlation between total dAGEs and NOVA 3-%Kcal in total population"
   ) +
   theme_minimal(base_size = 13) +
   theme(
@@ -79,12 +79,12 @@ ggsave(here::here("visualization", "scatter", "dAGEs_vs_nova3_correlation in tot
 p4 <- ggplot(data, aes(x = dAGES_total, y = NOVA4_pct)) + 
   geom_point(size = 2, color = "#2c3e50", alpha = 0.7) +
   geom_smooth(method = "lm", color = "#c0392b", fill = "#c0392b", alpha = 0.15) +
-  stat_cor(aes(label = paste0("italic(R)==", round(after_stat(r), 2), "~`,`~", fmt_p(after_stat(p)))),
-           method = "pearson", label.x.npc = "left", label.y.npc = "top", size = 4.5) +
+  stat_cor(aes(label = paste0("r==", round(after_stat(r), 2), "~`,`~", fmt_p(after_stat(p)))),
+           method = "pearson", label.x.npc = 0.85, label.y.npc = 0.85, size = 4.5) +
   labs(
     x = "dAGEs (total)",
     y = "NOVA 4-%Kcal",
-    #title = "Correlation between total dAGEs and NOVA 4-%Kcal in total population"
+    title = "Correlation between total dAGEs and NOVA 4-%Kcal in total population"
   ) +
   theme_minimal(base_size = 13) +
   theme(
